@@ -1,10 +1,12 @@
 package sample;
 
+import Connectvy.ConnectionClass;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -71,6 +73,12 @@ public class Controller implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+           ConnectionClass connectionClass =new ConnectionClass();
+        // we call conneClass  that we make it up
+        Connection connection= connectionClass.getConnection();
+        
+        
+        
         listv.getItems().add("- عمليات الصيانة الحالية");
         listv.getItems().add("- عمليات الصيانة المنتهية");
         listv.getItems().add("- عمليات الصيانة السابقة");
