@@ -7,6 +7,10 @@ package Connectvy;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,13 +18,15 @@ import java.sql.DriverManager;
  */
 public class ConnectionClass {
     public Connection connection;
+        Statement statement1;
+
     
     public  Connection getConnection(){
         String dbName="sql12252436";
         String userName="sql12252436";
         String password="lGryJjY5EN";
 
-        String dbName1="test";
+        String dbName1="project";
         String userName1="root";
         String password1="";
 
@@ -50,8 +56,43 @@ public class ConnectionClass {
 
         return connection;
     }
+    
+    
+public ResultSet execQuery(String query) {
 
 
+        ResultSet result;
+        try {
+            //connectDB();  عشان لمى اشغل المين الثاني يتصل بالداتا عن هذي الميثود
+
+            connectDB();
+            result = statement1.executeQuery(query);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error:" + ex.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Exeption at execAxtion " + ex.getLocalizedMessage());
+            return null;
+
+        }
+        return result;
+
+    }
+
+  public void connectDB() {
+        ConnectionClass connectionClass = new ConnectionClass();
+        // we call conneClass  that we make it up
+        Connection connection = connectionClass.getConnection();
+        try {
+            statement1 = connection.createStatement();
+        } catch (SQLException ex) {
+            System.out.println("Exeption at createStatement " + ex.getLocalizedMessage());
+        }
+
+
+    }
+
+
+    
 
     
 }
